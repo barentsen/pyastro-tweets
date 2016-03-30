@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+  <head>
+    <link href='style.css' rel='stylesheet' type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700' rel='stylesheet' type='text/css'>
+    <title>Python in Astronomy - 21-25 March 2016</title>
+    <link rel="icon" 
+      type="image/png" 
+      href="astropython.png">
+  </head>
+  <body>
+    <div id="content">
+
+     <h1>
+        Python in Astronomy 2016
+      </h1>
+      <h2>
+        21-25 March 2016, University of Washington, Seattle
+      </h2><br>
+      <img width="100" src='python-logo-generic.png'><br>
+
+    <div class="about">
+        <p>
+          During the conference, nearly 900 messages were posted on Twitter
+          which included the hashtag
+          <a href="https://twitter.com/search?q=%23pyastro16">#pyastro16</a>.
+          On this page we present an overview of the social activity
+          by displaying, in chronological order, the {{tweets|length}} "most popular" tweets
+          which were retweeted or favourited more than five times.
+        </p>
+      </div>
+
+      <div class="about">
+        <h2>The #PyAstro16 Twitter Archive</h2>
+        <ul>
+          <li><a href="#day-1">Day 1: 21 March 2016</a></li>
+          <li><a href="#day-2">Day 2: 22 March 2016</a></li>
+          <li><a href="#day-3">Day 3: 23 March 2016</a></li>
+          <li><a href="#day-4">Day 4: 24 March 2016</a></li>
+          <li><a href="#day-5">Day 5: 25 March 2016</a></li>
+          <li><a href="#after">After the meeting</a></li>
+        </ul>
+
+        <h3 id="day-1">Day 1: 21 March 2016</h3>
+        <div id="tweets-day-1"></div>
+
+        <h3 id="day-2">Day 2: 22 March 2016</h3>
+        <div id="tweets-day-2"></div>
+
+        <h3 id="day-3">Day 3: 23 March 2016</h3>
+        <div id="tweets-day-3"></div>
+
+        <h3 id="day-4">Day 4: 24 March 2016</h3>
+        <div id="tweets-day-4"></div>
+
+        <h3 id="day-5">Day 5: 25 March 2016</h3>
+        <div id="tweets-day-5"></div>
+
+        <h3 id="after">After the meeting</h3>
+        <div id="tweets-after"></div>
+
+      </div>
+</div>
+
+<script>
+// First, load the widgets.js file asynchronously
+window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));
+
+// Wait for the asynchronous resources to load
+twttr.ready(function (twttr) {
+  // Now add the tweets
+  {% for tweet in tweets.itertuples() -%}
+  twttr.widgets.createTweet("{{tweet.id}}",
+                            document.getElementById('{{tweet.label}}'),
+                            { theme: 'dark' });
+  {% endfor -%}
+});
+</script>
+
+</body>
+</html>
